@@ -1,16 +1,16 @@
-# sdi_hybrid
+## Intro
 
-Hybrid client for SDI Project.
+Hybrid client application for SDI Project built with Flutter framework.
 
-## Getting Started
+## Contribution
 
-This project is a starting point for a Flutter application.
+Clone and open project using `IntelliJ IDEA`
 
-A few resources to get you started if this is your first Flutter project:
+## Information
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Build for
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
++ Android
++ iOS
++ Web
+
