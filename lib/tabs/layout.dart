@@ -1,5 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sdi_hybrid/state/user_provider.dart';
 import 'package:sdi_hybrid/tabs/user.dart';
 import 'dashboard.dart';
 import 'history.dart';
@@ -38,61 +40,81 @@ class _LayoutPageState extends State<LayoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BrnAppBar(
-        leading: const Icon(
-          Icons.search,
-          color: Colors.white,
-        ),
-        themeData: BrnAppBarConfig.dark(),
-        elevation: 4,
-        title: 'Mildew Identifier',
-        actions: BrnIconAction(
-          child: const Icon(
-            Icons.add,
+        appBar: BrnAppBar(
+          leading: const Icon(
+            Icons.search,
             color: Colors.white,
           ),
-          iconPressed: () {},
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView(
-              onPageChanged: (pagePos) {
-                setState(() {
-                  currentPage = pagePos;
-                });
-              },
-              scrollDirection: Axis.horizontal,
-              controller: _pageController,
-              children: children,
+          themeData: BrnAppBarConfig.dark(),
+          elevation: 4,
+          title: 'Mildew Identifier',
+          actions: BrnIconAction(
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
             ),
+            iconPressed: () {},
           ),
-          BrnBottomTabBar(
-            fixedColor: Colors.blue,
-            currentIndex: currentPage,
-            onTap: (value) {
-              setState(() {
-                currentPage = value;
-                _pageController.jumpToPage(currentPage);
-              });
-            },
-            badgeColor: Colors.red,
-            items: <BrnBottomTabBarItem>[
-              BrnBottomTabBarItem(
-                  icon: const Icon(Icons.home_outlined),
-                  title: Text(titles[0])),
-              BrnBottomTabBarItem(
-                  icon: const Icon(Icons.history_outlined),
-                  title: Text(titles[1])),
-              BrnBottomTabBarItem(
-                  icon: const Icon(Icons.account_circle_outlined),
-                  title: Text(titles[2])),
-            ],
-          )
-        ],
-      ),
-    );
+        ),
+        body: Consumer<UserProvider>(
+          builder: (context, userProvider, _) {
+            if (userProvider.user.id > 0) {
+              return Column(
+                children: [
+                  Expanded(
+                    child: PageView(
+                      onPageChanged: (pagePos) {
+                        setState(() {
+                          currentPage = pagePos;
+                        });
+                      },
+                      scrollDirection: Axis.horizontal,
+                      controller: _pageController,
+                      children: children,
+                    ),
+                  ),
+                  BrnBottomTabBar(
+                    fixedColor: Colors.blue,
+                    currentIndex: currentPage,
+                    onTap: (value) {
+                      setState(() {
+                        currentPage = value;
+                        _pageController.jumpToPage(currentPage);
+                      });
+                    },
+                    badgeColor: Colors.red,
+                    items: <BrnBottomTabBarItem>[
+                      BrnBottomTabBarItem(
+                          icon: const Icon(Icons.home_outlined),
+                          title: Text(titles[0])),
+                      BrnBottomTabBarItem(
+                          icon: const Icon(Icons.history_outlined),
+                          title: Text(titles[1])),
+                      BrnBottomTabBarItem(
+                          icon: const Icon(Icons.account_circle_outlined),
+                          title: Text(titles[2])),
+                    ],
+                  )
+                ],
+              );
+            } else {
+              return BrnIconButton(
+                  name: '进行一个测试登录',
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                  direction: Direction.bottom,
+                  padding: 4,
+                  iconHeight: 30,
+                  iconWidth: 30,
+                  iconWidget: const Icon(Icons.arrow_upward),
+                  onTap: () {
+                    BrnToast.show('按钮被点击', context);
+                    userProvider.login("neteralex", "1q2w3e\$r5tGh");
+                  });
+            }
+          },
+        ));
   }
 }
 

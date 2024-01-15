@@ -30,5 +30,8 @@ class Global {
   }
 
   // Save user
-  static saveUser() => _prefs.setString("user", jsonEncode(user.toJson()));
+  static void saveUser() {
+    print(user.nickname);
+    _prefs.setString("user", jsonEncode(user.toJson()));
+  }
 }
