@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sdi_hybrid/state/user_provider.dart';
 import 'package:sdi_hybrid/tabs/layout.dart';
 
 import 'common/global.dart';
 
 Future<void> main() async {
-  Global.init().then((e) => runApp(const MyApp()));
+  Global.init().then((e) => runApp(ChangeNotifierProvider(
+        create: (context) => UserProvider(),
+        child: const MyApp(),
+      )));
 }
 
 class MyApp extends StatelessWidget {

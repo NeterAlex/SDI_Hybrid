@@ -1,3 +1,7 @@
+import 'package:flutter/cupertino.dart';
+
+import '../state/user_provider.dart';
+
 class User {
   int id;
   String nickname;
