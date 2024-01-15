@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sdi_hybrid/pages/history_gallery.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -12,12 +13,9 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 30, color: Colors.blue),
-        ),
+        child: HistoryGalleryPage(),
       ),
     );
   }

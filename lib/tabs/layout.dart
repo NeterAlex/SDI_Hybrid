@@ -1,8 +1,8 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:sdi_hybrid/pages/history.dart';
-import 'package:sdi_hybrid/pages/user.dart';
+import 'package:sdi_hybrid/tabs/user.dart';
 import 'dashboard.dart';
+import 'history.dart';
 
 class LayoutPage extends StatefulWidget {
   const LayoutPage({super.key, required this.title});

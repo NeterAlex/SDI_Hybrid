@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sdi_hybrid/pages/layout.dart';
+import 'package:sdi_hybrid/tabs/layout.dart';
+import 'package:sdi_hybrid/utils/http.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDio();
   runApp(const MyApp());
 }
 
