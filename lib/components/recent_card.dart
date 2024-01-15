@@ -4,17 +4,17 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../utils/config.dart';
-import '../utils/http.dart';
+import '../common/config.dart';
+import '../common/http.dart';
 
-class HistoryGalleryPage extends StatefulWidget {
-  const HistoryGalleryPage({super.key});
+class RecentCard extends StatefulWidget {
+  const RecentCard({super.key});
 
   @override
-  State<HistoryGalleryPage> createState() => _HistoryGalleryPageState();
+  State<RecentCard> createState() => _RecentCardState();
 }
 
-class _HistoryGalleryPageState extends State<HistoryGalleryPage> {
+class _RecentCardState extends State<RecentCard> {
   bool enabled = false;
   bool isLoading = true;
 
@@ -38,7 +38,7 @@ class _HistoryGalleryPageState extends State<HistoryGalleryPage> {
 
 Future<List<BrnPhotoGroupConfig>> requestList() async {
   // Build request
-  final response = await dio.get("/data/list?user_id=1");
+  final response = await dio.get("/data/recent?user_id=1");
   var config = await ConfigHelper.getConfig();
   Map<String, dynamic> resp = json.decode(
     response.toString(),

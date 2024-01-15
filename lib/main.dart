@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sdi_hybrid/tabs/layout.dart';
-import 'package:sdi_hybrid/utils/http.dart';
+
+import 'common/global.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await configureDio();
-  runApp(const MyApp());
+  Global.init().then((e) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
