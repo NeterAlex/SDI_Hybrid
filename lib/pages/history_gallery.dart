@@ -24,7 +24,7 @@ class _HistoryGalleryPageState extends State<HistoryGalleryPage> {
       future: requestList(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const BrnPageLoading();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
