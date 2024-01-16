@@ -1,11 +1,11 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sdi_hybrid/components/login.dart';
 import 'package:sdi_hybrid/state/user_provider.dart';
 import 'package:sdi_hybrid/tabs/user.dart';
-import 'dashboard.dart';
-import 'history.dart';
+import 'widgets/login_page.dart';
+import 'tabs/dashboard.dart';
+import 'tabs/history.dart';
 
 class LayoutPage extends StatefulWidget {
   const LayoutPage({super.key, required this.title});
@@ -20,9 +20,9 @@ class _LayoutPageState extends State<LayoutPage> {
   late PageController _pageController;
   int currentPage = 0;
   var children = <Widget>[
-    const KeepAliveView(isKeepAlive: true, child: DashboardPage()),
-    const KeepAliveView(isKeepAlive: true, child: HistoryPage()),
-    const KeepAliveView(isKeepAlive: true, child: UserPage())
+    const KeepAliveView(isKeepAlive: true, child: DashboardTab()),
+    const KeepAliveView(isKeepAlive: true, child: HistoryTab()),
+    const KeepAliveView(isKeepAlive: true, child: UserTab())
   ];
   var titles = ['首页', '识别记录', '用户'];
 

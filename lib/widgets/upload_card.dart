@@ -1,14 +1,14 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 
-class ImageUploader extends StatefulWidget {
-  const ImageUploader({super.key});
+class UploadCard extends StatefulWidget {
+  const UploadCard({super.key});
 
   @override
-  State<ImageUploader> createState() => _ImageUploaderState();
+  State<UploadCard> createState() => _UploadCardState();
 }
 
-class _ImageUploaderState extends State<ImageUploader> {
+class _UploadCardState extends State<UploadCard> {
   @override
   Widget build(BuildContext context) {
     return Column(

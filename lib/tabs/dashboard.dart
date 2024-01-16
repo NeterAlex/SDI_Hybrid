@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sdi_hybrid/components/image_uploader.dart';
-import 'package:sdi_hybrid/components/recent_card.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+import '../widgets/recent_card.dart';
+import '../widgets/upload_card.dart';
+
+class DashboardTab extends StatefulWidget {
+  const DashboardTab({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<DashboardTab> createState() => _DashboardTabState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardTabState extends State<DashboardTab> {
   String title = "首页";
 
   @override
@@ -18,7 +19,7 @@ class _DashboardPageState extends State<DashboardPage> {
       body: Center(
         child: SingleChildScrollView(
           child: Column(children: [
-            ImageUploader(),
+            UploadCard(),
             RecentCard(),
           ]),
         ),

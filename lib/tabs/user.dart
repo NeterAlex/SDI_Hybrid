@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sdi_hybrid/components/login.dart';
 
-class UserPage extends StatefulWidget {
-  const UserPage({super.key});
+import '../widgets/login_page.dart';
+
+class UserTab extends StatefulWidget {
+  const UserTab({super.key});
 
   @override
-  State<UserPage> createState() => _UserPageState();
+  State<UserTab> createState() => _UserTabState();
 }
 
-class _UserPageState extends State<UserPage> {
+class _UserTabState extends State<UserTab> {
   String title = "用户";
 
   @override

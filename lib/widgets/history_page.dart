@@ -8,14 +8,14 @@ import '../common/config.dart';
 import '../common/global.dart';
 import '../common/http.dart';
 
-class HistoryGalleryPage extends StatefulWidget {
-  const HistoryGalleryPage({super.key});
+class HistoryPage extends StatefulWidget {
+  const HistoryPage({super.key});
 
   @override
-  State<HistoryGalleryPage> createState() => _HistoryGalleryPageState();
+  State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _HistoryGalleryPageState extends State<HistoryGalleryPage> {
+class _HistoryPageState extends State<HistoryPage> {
   bool enabled = false;
   bool isLoading = true;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sdi_hybrid/state/user_provider.dart';
-import 'package:sdi_hybrid/tabs/layout.dart';
+import 'package:sdi_hybrid/layout.dart';
 
 import 'common/global.dart';
 
