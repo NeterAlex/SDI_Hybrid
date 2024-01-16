@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bruno/bruno.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,23 +13,31 @@ class UserProvider with ChangeNotifier {
   User get user => Global.user;
 
   // Login handler
-  Future<void> login(String username, String password) async {
-    final formData =
-        FormData.fromMap({"username": username, "password": password});
-    var response = await dio.post("/user/login",
-        data: formData,
-        options: Options(contentType: Headers.formUrlEncodedContentType));
-    Map<String, dynamic> resp = jsonDecode(response.toString());
-    dynamic userinfo = resp["data"];
-    if (kDebugMode) {
-      print("Logged $userinfo");
+  Future<bool> login(String username, String password) async {
+    try {
+      final formData =
+          FormData.fromMap({"username": username, "password": password});
+      var response = await dio.post("/user/login",
+          data: formData,
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      Map<String, dynamic> resp = jsonDecode(response.toString());
+      dynamic userinfo = resp["data"];
+      if (userinfo == null) {
+        return false;
+      }
+      if (kDebugMode) {
+        print("Logged $userinfo");
+      }
+      Global.user = User(
+          id: userinfo["id"],
+          nickname: userinfo["nickname"],
+          jwt: userinfo["jwt_token"]);
+      Global.saveUser();
+      notifyListeners();
+      return true;
+    } on Exception catch (e) {
+      return false;
     }
-    Global.user = User(
-        id: userinfo["id"],
-        nickname: userinfo["nickname"],
-        jwt: userinfo["jwt_token"]);
-    Global.saveUser();
-    notifyListeners();
   }
 
   // Logout handler
