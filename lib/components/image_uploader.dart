@@ -1,8 +1,5 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../state/user_provider.dart';
 
 class ImageUploader extends StatefulWidget {
   const ImageUploader({super.key});
@@ -12,16 +9,6 @@ class ImageUploader extends StatefulWidget {
 }
 
 class _ImageUploaderState extends State<ImageUploader> {
-  bool enabled = false;
-  bool isLoading = true;
-  late UserProvider _userProvider;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _userProvider = Provider.of<UserProvider>(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,7 +30,7 @@ class _ImageUploaderState extends State<ImageUploader> {
             children: [
               Expanded(
                 child: BrnShadowCard(
-                  padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                  padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
                   color: const Color.fromARGB(255, 241, 245, 255),
                   child: BrnIconButton(
                       name: '病害识别',

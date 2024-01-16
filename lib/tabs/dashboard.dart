@@ -1,4 +1,3 @@
-import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:sdi_hybrid/components/image_uploader.dart';
 import 'package:sdi_hybrid/components/recent_card.dart';
@@ -17,10 +16,12 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Column(children: [
-          ImageUploader(),
-          RecentCard(),
-        ]),
+        child: SingleChildScrollView(
+          child: Column(children: [
+            ImageUploader(),
+            RecentCard(),
+          ]),
+        ),
       ),
     );
   }

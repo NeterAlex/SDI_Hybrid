@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../common/config.dart';
+import '../common/global.dart';
 import '../common/http.dart';
 
 class HistoryGalleryPage extends StatefulWidget {
@@ -38,7 +39,8 @@ class _HistoryGalleryPageState extends State<HistoryGalleryPage> {
 
 Future<List<BrnPhotoGroupConfig>> requestList() async {
   // Build request
-  final response = await dio.get("/data/list?user_id=1");
+  final userId = Global.user.id;
+  final response = await dio.get("/data/list?user_id=$userId");
   var config = await ConfigHelper.getConfig();
   Map<String, dynamic> resp = json.decode(
     response.toString(),
