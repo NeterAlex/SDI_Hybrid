@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:bruno/bruno.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/global.dart';
 import '../common/http.dart';
@@ -36,6 +34,9 @@ class UserProvider with ChangeNotifier {
       notifyListeners();
       return true;
     } on Exception catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
       return false;
     }
   }

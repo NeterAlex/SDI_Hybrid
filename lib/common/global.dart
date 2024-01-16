@@ -31,7 +31,9 @@ class Global {
 
   // Save user
   static void saveUser() {
-    print(user.nickname);
+    if (kDebugMode) {
+      print("Logged ${user.nickname}");
+    }
     _prefs.setString("user", jsonEncode(user.toJson()));
   }
 }
