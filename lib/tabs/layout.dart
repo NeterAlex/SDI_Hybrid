@@ -1,6 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sdi_hybrid/components/login.dart';
 import 'package:sdi_hybrid/state/user_provider.dart';
 import 'package:sdi_hybrid/tabs/user.dart';
 import 'dashboard.dart';
@@ -98,20 +99,7 @@ class _LayoutPageState extends State<LayoutPage> {
                 ],
               );
             } else {
-              return BrnIconButton(
-                  name: '进行一个测试登录',
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                  direction: Direction.bottom,
-                  padding: 4,
-                  iconHeight: 30,
-                  iconWidth: 30,
-                  iconWidget: const Icon(Icons.arrow_upward),
-                  onTap: () {
-                    BrnToast.show('按钮被点击', context);
-                    userProvider.login("neteralex", "1q2w3e\$r5tGh");
-                  });
+              return const LoginPage();
             }
           },
         ));

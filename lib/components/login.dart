@@ -1,7 +1,6 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sdi_hybrid/common/http.dart';
 import 'package:sdi_hybrid/state/user_provider.dart';
 
 class LoginPage extends StatefulWidget {

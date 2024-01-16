@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../common/config.dart';
 import '../common/http.dart';
+import '../state/user_provider.dart';
 
 class RecentCard extends StatefulWidget {
   const RecentCard({super.key});
@@ -17,66 +18,50 @@ class RecentCard extends StatefulWidget {
 class _RecentCardState extends State<RecentCard> {
   bool enabled = false;
   bool isLoading = true;
+  late UserProvider _userProvider;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _userProvider = Provider.of<UserProvider>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: requestList(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const BrnPageLoading();
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          var data = snapshot.data;
-          return BrnGallerySummaryPage(allConfig: data!);
-        }
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          BrnShadowCard(
+              child: Column(
+            children: [
+              BrnEnhanceNumberCard(
+                padding: const EdgeInsets.all(20),
+                rowCount: 2,
+                itemChildren: [
+                  BrnNumberInfoItemModel(
+                    title: '霜霉病',
+                    number: '24',
+                  ),
+                  BrnNumberInfoItemModel(
+                    title: '白粉病',
+                    number: '180',
+                  ),
+                ],
+              ),
+            ],
+          )),
+        ],
+      ),
     );
   }
 }
 
-Future<List<BrnPhotoGroupConfig>> requestList() async {
+Future<void> requestList() async {
   // Build request
-  final response = await dio.get("/data/recent?user_id=1");
+  final response = await dio.get("/data/list?user_id=1");
   var config = await ConfigHelper.getConfig();
   Map<String, dynamic> resp = json.decode(
     response.toString(),
   );
-
-  // Build ImageList
-  List<BrnPhotoItemConfig> downyImageList = [];
-  List<BrnPhotoItemConfig> powderyImageList = [];
-  for (dynamic item in resp["data"]) {
-    if (item["type"] == "downy") {
-      var description = "";
-      item["count"].forEach((k, v) => description += "$k：$v处\n");
-
-      downyImageList.add(BrnPhotoItemConfig(
-          url: "${config.serverUrl}/${item["image"]}",
-          showBottom: true,
-          bottomCardModel: PhotoBottomCardState.cantFold,
-          name:
-              "霜霉病 - ${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse(item["time"]))} - ${item['id']} ",
-          des: description));
-    } else if (item["type"] == "powdery") {
-      var description = "";
-      item["count"].forEach((k, v) => description += "$k：$v处\n");
-
-      powderyImageList.add(BrnPhotoItemConfig(
-          url: "${config.serverUrl}/${item["image"]}",
-          showBottom: true,
-          bottomCardModel: PhotoBottomCardState.cantFold,
-          name:
-              "白粉病 - ${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse(item["time"]))} - ${item['id']} ",
-          des: description));
-    }
-  }
-
-  var downyGroup =
-      BrnPhotoGroupConfig(title: "霜霉病", configList: downyImageList);
-  var powderyGroup =
-      BrnPhotoGroupConfig(title: "白粉病", configList: powderyImageList);
-  List<BrnPhotoGroupConfig> results = [downyGroup, powderyGroup];
-  return results;
 }

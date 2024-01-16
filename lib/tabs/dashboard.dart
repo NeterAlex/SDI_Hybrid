@@ -1,5 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
+import 'package:sdi_hybrid/components/image_uploader.dart';
+import 'package:sdi_hybrid/components/recent_card.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -13,23 +15,11 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(children: [
-          BrnEnhanceNumberCard(
-            padding: const EdgeInsets.all(20),
-            rowCount: 2,
-            itemChildren: [
-              BrnNumberInfoItemModel(
-                title: '霜霉病',
-                number: '24',
-              ),
-              BrnNumberInfoItemModel(
-                title: '白粉病',
-                number: '180',
-              ),
-            ],
-          )
+          ImageUploader(),
+          RecentCard(),
         ]),
       ),
     );
