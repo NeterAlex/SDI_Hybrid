@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sdi_hybrid/components/login.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -14,10 +15,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 30, color: Colors.blue),
-        ),
+        child: LoginPage(),
       ),
     );
   }
