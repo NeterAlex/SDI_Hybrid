@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.only(top: 30.0, bottom: 15),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -86,7 +86,17 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-            )
+            ),
+            Expanded(
+                child: GestureDetector(
+              onTap: () {},
+              child: const Text(
+                '注册账户',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+              ),
+            )),
           ],
         ),
       ),
