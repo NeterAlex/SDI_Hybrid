@@ -24,7 +24,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.neteralex.sdi.hybrid.sdi_hybrid"
-    compileSdkVersion flutter.compileSdkVersion
+    // old: flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
