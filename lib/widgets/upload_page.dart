@@ -1,6 +1,13 @@
+import 'dart:convert';
+
 import 'package:bruno/bruno.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sdi_hybrid/common/http.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+
+import '../state/user_provider.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
@@ -15,6 +22,13 @@ class _UploadPageState extends State<UploadPage> {
     ItemEntity(key: 'powdery', name: "大豆白粉病", value: 'powdery')
   ];
   var uploadType = "downy";
+  late UserProvider _userProvider;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _userProvider = Provider.of<UserProvider>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +84,14 @@ class _UploadPageState extends State<UploadPage> {
                             Icons.photo_size_select_actual_outlined,
                             color: Color.fromARGB(255, 8, 135, 235),
                           ),
-                          onTap: () {}),
+                          onTap: () async {
+                            final imagePath = await _pickImage(context);
+                            final result = await _uploadImage(
+                                imagePath, uploadType, _userProvider.user.id);
+                            if (result) {
+                              BrnToast.show("成功", context);
+                            }
+                          }),
                     ),
                   ),
                 ],
@@ -87,10 +108,15 @@ Future<String> _pickImage(BuildContext context) async {
   final List<AssetEntity>? asset = await AssetPicker.pickAssets(context,
       pickerConfig: const AssetPickerConfig(maxAssets: 1));
   if (asset == null) return "";
-  var imgFile = await asset.first.file;
-  if (imgFile == null) return "";
-  var imagePath = imgFile.path;
-  return imagePath;
+  final imageFile = await asset.first.file;
+  if (imageFile == null) return "";
+  return imageFile.path;
 }
 
-void handleImageUpload() {}
+Future<bool> _uploadImage(String imagePath, String type, int userId) async {
+  final formData = FormData.fromMap(
+      {'file': await MultipartFile.fromFile(imagePath), 'user_id': userId});
+  final resp = await dio.post("calc/$type", data: formData);
+  Map<String, dynamic> data = jsonDecode(resp.toString());
+  return data["success"];
+}
