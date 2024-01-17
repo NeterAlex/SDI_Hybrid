@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 import 'package:sdi_hybrid/common/global.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import '../common/config.dart';
 import '../common/http.dart';
 
@@ -50,7 +51,13 @@ class _RecentCardState extends State<RecentCard> {
                     shrinkWrap: true,
                   );
                 }
-              })
+              }),
+          const Center(
+              child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("仅显示最新四条记录，更多请至识别记录查看",
+                style: TextStyle(color: Colors.black38, fontSize: 12)),
+          ))
         ],
       ),
     );
