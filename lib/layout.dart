@@ -45,18 +45,11 @@ class _LayoutPageState extends State<LayoutPage> {
         appBar: BrnAppBar(
           leading: const Icon(
             Icons.search,
-            color: Colors.white,
+            color: Color.fromARGB(255, 46, 49, 59),
           ),
           themeData: BrnAppBarConfig.dark(),
           elevation: 4,
           title: 'Mildew Identifier',
-          actions: BrnIconAction(
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-            iconPressed: () {},
-          ),
         ),
         body: Consumer<UserProvider>(
           builder: (context, userProvider, _) {
