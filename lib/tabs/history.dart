@@ -9,14 +9,8 @@ class HistoryTab extends StatefulWidget {
 }
 
 class _HistoryTabState extends State<HistoryTab> {
-  String title = "识别记录";
-
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: HistoryPage(),
-      ),
-    );
+    return const HistoryPage();
   }
 }

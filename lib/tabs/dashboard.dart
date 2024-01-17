@@ -11,18 +11,14 @@ class DashboardTab extends StatefulWidget {
 }
 
 class _DashboardTabState extends State<DashboardTab> {
-  String title = "首页";
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(children: [
-            UploadCard(),
-            RecentCard(),
-          ]),
-        ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          UploadCard(),
+          RecentCard(),
+        ]),
       ),
     );
   }
