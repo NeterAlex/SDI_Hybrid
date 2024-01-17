@@ -1,5 +1,6 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
+import 'package:sdi_hybrid/widgets/upload_page.dart';
 
 class UploadCard extends StatefulWidget {
   const UploadCard({super.key});
@@ -46,7 +47,11 @@ class _UploadCardState extends State<UploadCard> {
                         color: Color.fromARGB(255, 8, 135, 235),
                       ),
                       onTap: () {
-                        BrnToast.show('按钮被点击', context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const Material(child: UploadPage())));
                       }),
                 ),
               ),

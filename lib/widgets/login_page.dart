@@ -93,7 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Material(child: RegisterPage())));
+                        builder: (context) =>
+                            const Material(child: RegisterPage())));
               },
               child: const Text(
                 '注册账户',
