@@ -9,7 +9,11 @@ import 'http.dart';
 
 class Global {
   static late SharedPreferences _prefs;
-  static User user = User(id: -1, nickname: "未登录", jwt: "empty");
+  static User user = User(
+      id: -1,
+      nickname: "未登录",
+      jwt: "empty",
+      expireTime: DateTime(2020).toIso8601String());
 
   static bool get isRelease => const bool.fromEnvironment("dart.vm.product");
 
@@ -20,6 +24,15 @@ class Global {
     if (savedUser != null) {
       try {
         user = User.fromJson(jsonDecode(savedUser));
+        final timeNow = DateTime.now();
+        if (timeNow.isAfter(DateTime.parse(user.expireTime))) {
+          user = User(
+              id: -1,
+              nickname: "未登录",
+              jwt: "empty",
+              expireTime: DateTime(2020).toIso8601String());
+          saveUser();
+        }
       } catch (e) {
         if (kDebugMode) {
           print(e);

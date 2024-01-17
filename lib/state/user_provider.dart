@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
 import '../common/global.dart';
 import '../common/http.dart';
@@ -26,10 +27,14 @@ class UserProvider with ChangeNotifier {
       if (kDebugMode) {
         print("Logged $userinfo");
       }
+      Map<String, dynamic> jwtPayload = Jwt.parseJwt(userinfo["jwt_token"]);
+      print(jwtPayload);
       Global.user = User(
           id: userinfo["id"],
           nickname: userinfo["nickname"],
-          jwt: userinfo["jwt_token"]);
+          jwt: userinfo["jwt_token"],
+          expireTime: DateTime.fromMillisecondsSinceEpoch(jwtPayload["exp"])
+              .toIso8601String());
       Global.saveUser();
       notifyListeners();
       return true;
@@ -67,7 +72,11 @@ class UserProvider with ChangeNotifier {
 
   // Logout handler
   void logout() {
-    Global.user = User(id: -1, nickname: "未登录", jwt: "empty");
+    Global.user = User(
+        id: -1,
+        nickname: "未登录",
+        jwt: "empty",
+        expireTime: DateTime(2020).toIso8601String());
     Global.saveUser();
     notifyListeners();
   }
