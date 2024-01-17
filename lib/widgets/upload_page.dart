@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bruno/bruno.dart';
 import 'package:dio/dio.dart';
@@ -22,6 +23,7 @@ class _UploadPageState extends State<UploadPage> {
     ItemEntity(key: 'powdery', name: "大豆白粉病", value: 'powdery')
   ];
   var uploadType = "downy";
+  var imagePath = "";
   late UserProvider _userProvider;
 
   @override
@@ -70,7 +72,7 @@ class _UploadPageState extends State<UploadPage> {
                   Expanded(
                     child: BrnShadowCard(
                       padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-                      color: const Color.fromARGB(255, 241, 245, 255),
+                      color: Colors.white,
                       child: BrnIconButton(
                           name: '选择图片',
                           style: const TextStyle(
@@ -85,15 +87,53 @@ class _UploadPageState extends State<UploadPage> {
                             color: Color.fromARGB(255, 8, 135, 235),
                           ),
                           onTap: () async {
-                            final imagePath = await _pickImage(context);
-                            final result = await _uploadImage(
-                                imagePath, uploadType, _userProvider.user.id);
-                            if (result) {
-                              BrnToast.show("成功", context);
-                            }
+                            final selectedImagePath = await _pickImage(context);
+                            setState(() {
+                              imagePath = selectedImagePath;
+                            });
                           }),
                     ),
                   ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: BrnShadowCard(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          color: Colors.white,
+                          child: imagePath == ""
+                              ? const Center(child: Text("尚未选择图片"))
+                              : Image.file(File(imagePath), fit: BoxFit.cover),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 30),
+                    child: BrnBigMainButton(
+                        title: "上传并识别",
+                        isEnable: imagePath != "",
+                        onTap: () async {
+                          final result = await _uploadImage(
+                              imagePath, uploadType, _userProvider.user.id);
+                          if (result) {
+                            BrnToast.show("识别成功", context);
+                            setState(() {
+                              imagePath = "";
+                            });
+                          } else {
+                            BrnToast.show("识别失败", context);
+                          }
+                        }),
+                  )
                 ],
               ),
             ),
@@ -116,7 +156,7 @@ Future<String> _pickImage(BuildContext context) async {
 Future<bool> _uploadImage(String imagePath, String type, int userId) async {
   final formData = FormData.fromMap(
       {'file': await MultipartFile.fromFile(imagePath), 'user_id': userId});
-  final resp = await dio.post("calc/$type", data: formData);
+  final resp = await dio.post("/calc/$type", data: formData);
   Map<String, dynamic> data = jsonDecode(resp.toString());
   return data["success"];
 }
