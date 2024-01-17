@@ -28,7 +28,6 @@ class UserProvider with ChangeNotifier {
         print("Logged $userinfo");
       }
       Map<String, dynamic> jwtPayload = Jwt.parseJwt(userinfo["jwt_token"]);
-      print(jwtPayload);
       Global.user = User(
           id: userinfo["id"],
           nickname: userinfo["nickname"],
