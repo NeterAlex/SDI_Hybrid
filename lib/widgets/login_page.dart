@@ -2,6 +2,7 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sdi_hybrid/state/user_provider.dart';
+import 'package:sdi_hybrid/widgets/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -88,7 +89,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Expanded(
                 child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Material(child: RegisterPage())));
+              },
               child: const Text(
                 '注册账户',
                 style: TextStyle(
