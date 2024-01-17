@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/login_page.dart';
+import 'package:sdi_hybrid/widgets/user_card.dart';
 
 class UserTab extends StatefulWidget {
   const UserTab({super.key});
@@ -16,7 +15,12 @@ class _UserTabState extends State<UserTab> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: LoginPage(),
+        child: SingleChildScrollView(
+            child: Column(
+          children: [
+            UserCard(),
+          ],
+        )),
       ),
     );
   }

@@ -41,6 +41,30 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  // Register handler
+  Future<bool> register(
+      String username, String password, String nickname) async {
+    try {
+      final formData = FormData.fromMap(
+          {"username": username, "password": password, "nickname": nickname});
+      var response = await dio.post("/user/register",
+          data: formData,
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      Map<String, dynamic> resp = jsonDecode(response.toString());
+      if (resp["success"] == null || resp["success"] == false) {
+        return false;
+      }
+      login(username, password);
+      notifyListeners();
+      return true;
+    } on Exception catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return false;
+    }
+  }
+
   // Logout handler
   void logout() {
     Global.user = User(id: -1, nickname: "未登录", jwt: "empty");
