@@ -14,14 +14,12 @@ class _UserTabState extends State<UserTab> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-            child: Column(
-          children: [
-            UserCard(),
-          ],
-        )),
-      ),
+      body: SingleChildScrollView(
+          child: Column(
+        children: [
+          UserCard(),
+        ],
+      )),
     );
   }
 }

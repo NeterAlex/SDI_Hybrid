@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sdi_hybrid/state/user_provider.dart';
 import 'package:sdi_hybrid/layout.dart';
+import 'package:sdi_hybrid/state/user_provider.dart';
 
 import 'common/global.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'SDI',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       home: const LayoutPage(title: "Mildew Identifier"),
     );
