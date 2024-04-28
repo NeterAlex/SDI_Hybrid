@@ -17,6 +17,7 @@ class Config {
   Config({required this.serverUrl});
 
   factory Config.fromJson(Map<String, dynamic> json) {
-    return Config(serverUrl: json["server_url"] ?? "http://localhost:5020");
+    return Config(
+        serverUrl: json["server_url"] ?? "https://sdi.api.neteralex.cn");
   }
 }
