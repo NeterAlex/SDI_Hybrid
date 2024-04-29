@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sdi_hybrid/widgets/history_page.dart';
+import 'package:sdi_hybrid/widgets/page/history_page.dart';
 
 class HistoryTab extends StatefulWidget {
   const HistoryTab({super.key});

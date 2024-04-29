@@ -6,7 +6,7 @@ import 'package:sdi_hybrid/tabs/user.dart';
 
 import 'tabs/dashboard.dart';
 import 'tabs/history.dart';
-import 'widgets/login_page.dart';
+import 'widgets/page/login_page.dart';
 
 class LayoutPage extends StatefulWidget {
   const LayoutPage({super.key, required this.title});

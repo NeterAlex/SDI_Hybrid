@@ -1,6 +1,6 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:sdi_hybrid/widgets/upload_page.dart';
+import 'package:sdi_hybrid/widgets/page/upload_page.dart';
 
 class UploadCard extends StatefulWidget {
   const UploadCard({super.key});
