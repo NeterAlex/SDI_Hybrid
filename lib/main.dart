@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: false,
       ),
-      home: const LayoutPage(title: "Mildew Identifier"),
+      home: const LayoutPage(title: "大豆病害检测"),
     );
   }
 }
