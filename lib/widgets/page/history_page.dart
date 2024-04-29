@@ -36,11 +36,15 @@ class _HistoryPageState extends State<HistoryPage> {
               return Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     var image = data[groupId!].configList?[indexId!]
                         as BrnPhotoItemConfig;
-                    var imageId = image.name?.split(" - ")[2];
-                    print(imageId);
+                    var imageId = image.name!.split(" - ")[2];
+                    if (await deleteData(imageId)) {
+                      BrnToast.showInCenter(text: "删除成功", context: context);
+                    } else {
+                      BrnToast.showInCenter(text: "删除失败", context: context);
+                    }
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text("删除"),
@@ -98,4 +102,11 @@ Future<List<BrnPhotoGroupConfig>> requestList() async {
       BrnPhotoGroupConfig(title: "白粉病", configList: powderyImageList);
   List<BrnPhotoGroupConfig> results = [downyGroup, powderyGroup];
   return results;
+}
+
+Future<bool> deleteData(String dataId) async {
+  final userId = Global.user.id;
+  final response = await dio.delete("/data?user_id=$userId&data_id=$dataId");
+  Map<String, dynamic> resp = json.decode(response.toString());
+  return bool.parse(resp["success"], caseSensitive: false);
 }
