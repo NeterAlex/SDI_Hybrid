@@ -32,8 +32,9 @@ class UserProvider with ChangeNotifier {
           id: userinfo["id"],
           nickname: userinfo["nickname"],
           jwt: userinfo["jwt_token"],
-          expireTime: DateTime.fromMillisecondsSinceEpoch(jwtPayload["exp"])
-              .toIso8601String());
+          expireTime:
+              DateTime.fromMillisecondsSinceEpoch(jwtPayload["exp"] * 1000)
+                  .toIso8601String());
       Global.saveUser();
       notifyListeners();
       return true;
