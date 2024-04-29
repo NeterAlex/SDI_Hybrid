@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'http.dart';
 
 class Global {
-  static late SharedPreferences _prefs;
   static User user = User(
       id: -1,
       nickname: "未登录",
@@ -19,8 +18,9 @@ class Global {
 
   static Future init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    _prefs = await SharedPreferences.getInstance();
-    var savedUser = _prefs.getString("user");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var savedUser = prefs.getString("user");
+
     if (savedUser != null) {
       try {
         user = User.fromJson(jsonDecode(savedUser));
@@ -43,10 +43,12 @@ class Global {
   }
 
   // Save user
-  static void saveUser() {
+  static void saveUser() async {
     if (kDebugMode) {
       print("Logged ${user.nickname}");
     }
-    _prefs.setString("user", jsonEncode(user.toJson()));
+    SharedPreferences prefs;
+    prefs = await SharedPreferences.getInstance();
+    prefs.setString("user", jsonEncode(user.toJson()));
   }
 }
