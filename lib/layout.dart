@@ -49,7 +49,7 @@ class _LayoutPageState extends State<LayoutPage> {
           ),
           themeData: BrnAppBarConfig.dark(),
           elevation: 4,
-          title: 'Mildew Identifier',
+          title: '大豆病害检测',
         ),
         body: Consumer<UserProvider>(
           builder: (context, userProvider, _) {
