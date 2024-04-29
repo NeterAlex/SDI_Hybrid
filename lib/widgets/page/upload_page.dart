@@ -47,7 +47,7 @@ class _UploadPageState extends State<UploadPage> {
               leftTagText: '提示',
               leftTagBackgroundColor: const Color(0xFFE0EDFF),
               leftTagTextColor: const Color(0xFF0984F9),
-              content: '进行识别前，请保证图片背景整洁且无显著遮挡。',
+              content: '进行识别前，请保证图片背景整洁且无明显遮挡。',
               backgroundColor: Colors.white,
               rightButtonBorderColor: const Color(0xFFEBFFF7),
               rightButtonTextColor: const Color(0xFF0984F9),
@@ -126,6 +126,7 @@ class _UploadPageState extends State<UploadPage> {
                               imagePath, uploadType, _userProvider.user.id);
                           if (result) {
                             BrnToast.show("识别成功", context);
+                            Navigator.pop(context);
                             setState(() {
                               imagePath = "";
                             });
