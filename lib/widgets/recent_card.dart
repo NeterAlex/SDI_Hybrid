@@ -127,12 +127,12 @@ Future<List<RecentCardData>> buildDataList() async {
   List<RecentCardData> list = [];
   for (final data in resp["data"]) {
     final type = data["type"] == "powdery" ? "白粉病" : "霜霉病";
-    final time =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse(data["time"]));
+    final time = DateTime.parse(data["time"]);
+    final finalTime = DateFormat(' yyyy-MM-dd HH:mm ').format(time);
     final image = "${config.serverUrl}/${data["image"]}";
     var description = "";
     data["count"].forEach((k, v) => description += "$k：$v处\n");
-    final result = RecentCardData(type, time, description, image);
+    final result = RecentCardData(type, finalTime, description, image);
     list.add(result);
   }
   return list;
