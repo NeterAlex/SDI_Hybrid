@@ -4,9 +4,9 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../common/config.dart';
-import '../common/global.dart';
-import '../common/http.dart';
+import '../../common/config.dart';
+import '../../common/global.dart';
+import '../../common/http.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -30,7 +30,24 @@ class _HistoryPageState extends State<HistoryPage> {
           return Text('Error: ${snapshot.error}');
         } else {
           var data = snapshot.data;
-          return BrnGallerySummaryPage(allConfig: data!);
+          return BrnGallerySummaryPage(
+            allConfig: data!,
+            detailRightAction: (groupId, indexId) {
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    var image = data[groupId!].configList?[indexId!]
+                        as BrnPhotoItemConfig;
+                    var imageId = image.name?.split(" - ")[2];
+                    print(imageId);
+                  },
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  child: const Text("删除"),
+                ),
+              );
+            },
+          );
         }
       },
     );

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:sdi_hybrid/common/http.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-import '../state/user_provider.dart';
+import '../../state/user_provider.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
