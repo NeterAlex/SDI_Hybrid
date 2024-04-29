@@ -130,6 +130,7 @@ class _UploadPageState extends State<UploadPage> {
                             title: "上传并识别",
                             isEnable: imagePath != "" && isUploading != true,
                             onTap: () async {
+                              BrnLoadingDialog.show(context, content: "数据上传中");
                               setState(() {
                                 isUploading = true;
                               });
@@ -137,6 +138,7 @@ class _UploadPageState extends State<UploadPage> {
                                   imagePath, uploadType, _userProvider.user.id);
                               if (result) {
                                 BrnToast.show("识别成功", context);
+                                BrnLoadingDialog.dismiss(context);
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -148,6 +150,7 @@ class _UploadPageState extends State<UploadPage> {
                                 });
                               } else {
                                 BrnToast.show("识别失败", context);
+                                BrnLoadingDialog.dismiss(context);
                                 flowProvider.refreshHomePage();
                                 setState(() {
                                   isUploading = false;

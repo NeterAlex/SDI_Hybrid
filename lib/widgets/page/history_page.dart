@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../common/config.dart';
 import '../../common/global.dart';
 import '../../common/http.dart';
+import '../../layout.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -37,14 +38,28 @@ class _HistoryPageState extends State<HistoryPage> {
                 padding: const EdgeInsets.all(4.0),
                 child: ElevatedButton(
                   onPressed: () async {
-                    var image = data[groupId!].configList?[indexId!]
-                        as BrnPhotoItemConfig;
-                    var imageId = image.name!.split(" - ")[2];
-                    if (await deleteData(imageId)) {
-                      BrnToast.showInCenter(text: "删除成功", context: context);
-                    } else {
-                      BrnToast.showInCenter(text: "删除失败", context: context);
-                    }
+                    BrnDialogManager.showSingleButtonDialog(
+                      context,
+                      title: "确定删除",
+                      label: '确定',
+                      message: "是否确认要删除该条识别结果？该结果将被永久删除。",
+                      onTap: () async {
+                        var image = data[groupId!].configList?[indexId!]
+                            as BrnPhotoItemConfig;
+                        var imageId = image.name!.split(" - ")[2];
+                        var isSuccess = await deleteData(imageId);
+                        if (isSuccess) {
+                          BrnToast.showInCenter(text: "删除成功", context: context);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Material(
+                                      child: LayoutPage(title: ""))));
+                        } else {
+                          BrnToast.showInCenter(text: "删除失败", context: context);
+                        }
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text("删除"),
@@ -108,5 +123,5 @@ Future<bool> deleteData(String dataId) async {
   final userId = Global.user.id;
   final response = await dio.delete("/data?user_id=$userId&data_id=$dataId");
   Map<String, dynamic> resp = json.decode(response.toString());
-  return bool.parse(resp["success"], caseSensitive: false);
+  return resp["success"];
 }
