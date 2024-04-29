@@ -1,6 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sdi_hybrid/state/flow_provider.dart';
 import 'package:sdi_hybrid/state/user_provider.dart';
 import 'package:sdi_hybrid/tabs/user.dart';
 
@@ -51,8 +52,8 @@ class _LayoutPageState extends State<LayoutPage> {
           elevation: 4,
           title: '大豆病害检测',
         ),
-        body: Consumer<UserProvider>(
-          builder: (context, userProvider, _) {
+        body: Consumer2<UserProvider, FlowProvider>(
+          builder: (context, userProvider, flowProvider, _) {
             if (userProvider.user.id > 0) {
               return Column(
                 children: [
