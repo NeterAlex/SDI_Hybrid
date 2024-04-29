@@ -52,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 obscureText: true,
                 validator: (v) {
-                  return v!.trim().length > 5 ? null : "昵称不能为空";
+                  return v!.trim().length > 1 ? null : "昵称长度需至少为2";
                 },
               ),
               TextFormField(
