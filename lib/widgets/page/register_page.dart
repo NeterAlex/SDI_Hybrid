@@ -50,7 +50,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   hintText: "您的昵称",
                   icon: Icon(Icons.text_fields_outlined),
                 ),
-                obscureText: true,
                 validator: (v) {
                   return v!.trim().length > 1 ? null : "昵称长度需至少为2";
                 },
