@@ -30,8 +30,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SDI',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const LayoutPage(title: "大豆病害检测"),
     );
