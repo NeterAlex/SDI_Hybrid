@@ -9,6 +9,7 @@ import 'package:sdi_hybrid/common/http.dart';
 import 'package:sdi_hybrid/layout.dart';
 import 'package:sdi_hybrid/state/flow_provider.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
 import '../../state/user_provider.dart';
 
@@ -44,20 +45,11 @@ class _UploadPageState extends State<UploadPage> {
             themeData: BrnAppBarConfig.dark(),
             elevation: 4,
             title: '病害识别',
+            backgroundColor: const Color.fromARGB(255, 0, 151, 87),
           ),
           body: SingleChildScrollView(
             child: Column(
               children: [
-                BrnNoticeBarWithButton(
-                  leftTagText: '提示',
-                  leftTagBackgroundColor: const Color(0xFFE0EDFF),
-                  leftTagTextColor: const Color(0xFF0984F9),
-                  content: '进行识别前，请保证图片背景整洁且无明显遮挡。',
-                  backgroundColor: Colors.white,
-                  rightButtonBorderColor: const Color(0xFFEBFFF7),
-                  rightButtonTextColor: const Color(0xFF0984F9),
-                  onRightButtonTap: () {},
-                ),
                 BrnSimpleSelection.radio(
                   menuName: "选择识别模型",
                   menuKey: "model",
@@ -79,17 +71,45 @@ class _UploadPageState extends State<UploadPage> {
                           padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
                           color: Colors.white,
                           child: BrnIconButton(
-                              name: '选择图片',
+                              name: '拍照',
                               style: const TextStyle(
                                   fontSize: 18,
-                                  color: Color.fromARGB(255, 8, 135, 235)),
+                                  color: Color.fromARGB(255, 0, 151, 87)),
+                              direction: Direction.bottom,
+                              padding: 4,
+                              iconHeight: 30,
+                              iconWidth: 30,
+                              iconWidget: const Icon(
+                                Icons.camera_alt_rounded,
+                                color: Color.fromARGB(255, 0, 151, 87),
+                              ),
+                              onTap: () async {
+                                final entity =
+                                    await CameraPicker.pickFromCamera(context);
+                                final file = await entity?.file;
+                                setState(() {
+                                  imagePath = file?.path ?? "";
+                                });
+                              }),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: BrnShadowCard(
+                          padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
+                          color: Colors.white,
+                          child: BrnIconButton(
+                              name: '图片',
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Color.fromARGB(255, 0, 151, 87)),
                               direction: Direction.bottom,
                               padding: 4,
                               iconHeight: 30,
                               iconWidth: 30,
                               iconWidget: const Icon(
                                 Icons.photo_size_select_actual_outlined,
-                                color: Color.fromARGB(255, 8, 135, 235),
+                                color: Color.fromARGB(255, 0, 151, 87),
                               ),
                               onTap: () async {
                                 final selectedImagePath =
@@ -115,17 +135,20 @@ class _UploadPageState extends State<UploadPage> {
                                   const EdgeInsets.fromLTRB(10, 10, 10, 10),
                               color: Colors.white,
                               child: imagePath == ""
-                                  ? const Center(child: Text("尚未选择图片"))
+                                  ? const Center(
+                                      child: Text(
+                                      "尚未选择图片",
+                                      style: TextStyle(color: Colors.grey),
+                                    ))
                                   : Image.file(File(imagePath),
                                       fit: BoxFit.cover),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 50, vertical: 30),
+                            horizontal: 32, vertical: 16),
                         child: BrnBigMainButton(
                             title: "上传并识别",
                             isEnable: imagePath != "" && isUploading != true,
