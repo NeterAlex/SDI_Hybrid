@@ -46,9 +46,10 @@ class _LayoutPageState extends State<LayoutPage> {
         appBar: BrnAppBar(
           leading: const Icon(
             Icons.search,
-            color: Color.fromARGB(255, 46, 49, 59),
+            color: Colors.transparent,
           ),
           themeData: BrnAppBarConfig.dark(),
+          backgroundColor: const Color.fromARGB(255, 0, 151, 87),
           elevation: 4,
           title: '大豆病害检测',
         ),
@@ -70,7 +71,7 @@ class _LayoutPageState extends State<LayoutPage> {
                     ),
                   ),
                   BrnBottomTabBar(
-                    fixedColor: Colors.blue,
+                    fixedColor: const Color.fromARGB(255, 0, 151, 87),
                     currentIndex: currentPage,
                     onTap: (value) {
                       setState(() {
