@@ -30,6 +30,7 @@ class _UserCardState extends State<UserCard> {
             children: [
               Expanded(
                 child: BrnShadowCard(
+                    circular: 8,
                     padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
                     color: Colors.white,
                     child: Row(
@@ -75,36 +76,10 @@ class _UserCardState extends State<UserCard> {
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
                     )),
-                    fixedSize: MaterialStateProperty.resolveWith(
-                        (states) => const Size(double.infinity, 60)),
-                    backgroundColor: MaterialStateProperty.resolveWith(
-                        (state) => Colors.white)),
-                onPressed: () {},
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.settings,
-                        color: Colors.black87,
-                      ),
-                      Text(
-                        "设置",
-                        style: TextStyle(color: Colors.black87, fontSize: 15),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                    )),
+                    foregroundColor: MaterialStateProperty.resolveWith(
+                        (states) => Colors.white),
                     fixedSize: MaterialStateProperty.resolveWith(
                         (states) => const Size(double.infinity, 60)),
                     backgroundColor: MaterialStateProperty.resolveWith(
