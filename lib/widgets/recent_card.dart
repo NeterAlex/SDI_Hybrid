@@ -20,16 +20,14 @@ class _RecentCardState extends State<RecentCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       child: Column(
         children: [
           const Text(
             "最新记录",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 41, 52, 71)),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
           FutureBuilder(
               future: buildDataList(),
               builder: (BuildContext context,
@@ -66,11 +64,30 @@ class _RecentCardState extends State<RecentCard> {
 
 Widget card(RecentCardData data) {
   return BrnShadowCard(
+      circular: 8,
       color: Colors.white,
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  data.type,
+                  style: const TextStyle(
+                      fontSize: 12, color: Color.fromARGB(255, 0, 151, 87)),
+                ),
+                const Expanded(child: SizedBox(width: 1)),
+                Text(
+                  data.time,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: SizedBox(
               child: Image.network(
                 data.image,
@@ -79,28 +96,23 @@ Widget card(RecentCardData data) {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: SizedBox(
-                child: Column(
+                child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    const Icon(Icons.photo_camera_back),
-                    const SizedBox(width: 5),
-                    Text(
-                      data.type,
-                      style: const TextStyle(fontSize: 15),
+                for (var line in data.info.trim().split("\n"))
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                    child: BrnTagCustom(
+                      textColor: const Color.fromARGB(255, 0, 151, 87),
+                      backgroundColor: const Color.fromARGB(56, 162, 255, 165),
+                      tagText: line,
+                      tagBorderRadius:
+                          const BorderRadius.all(Radius.circular(4)),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Badge(
-                  label: Text(data.time),
-                  backgroundColor: Colors.blueGrey,
-                ),
-                const SizedBox(height: 5),
-                Text(data.info, style: const TextStyle(fontSize: 12))
+                  )
               ],
             )),
           )
@@ -128,7 +140,7 @@ Future<List<RecentCardData>> buildDataList() async {
   for (final data in resp["data"]) {
     final type = data["type"] == "powdery" ? "白粉病" : "霜霉病";
     final time = DateTime.parse(data["time"]);
-    final finalTime = DateFormat(' yyyy-MM-dd HH:mm ').format(time);
+    final finalTime = DateFormat('yyyy-MM-dd HH:mm').format(time);
     final image = "${config.serverUrl}/${data["image"]}";
     var description = "";
     data["count"].forEach((k, v) => description += "$k：$v处\n");
