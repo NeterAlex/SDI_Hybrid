@@ -50,24 +50,34 @@ class _UploadPageState extends State<UploadPage> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                BrnSimpleSelection.radio(
-                  menuName: "选择识别模型",
-                  menuKey: "model",
-                  items: lists,
-                  defaultValue: uploadType,
-                  onSimpleSelectionChanged: (List<ItemEntity> filterParams) {
-                    setState(() {
-                      uploadType = filterParams.first.key!;
-                    });
-                    BrnToast.show("选择了${filterParams.first.name}模型", context);
-                  },
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  child: BrnShadowCard(
+                    circular: 8,
+                    child: BrnSimpleSelection.radio(
+                      menuName: "选择识别模型",
+                      menuKey: "model",
+                      items: lists,
+                      defaultValue: uploadType,
+                      onSimpleSelectionChanged:
+                          (List<ItemEntity> filterParams) {
+                        setState(() {
+                          uploadType = filterParams.first.key!;
+                        });
+                        BrnToast.show(
+                            "选择了${filterParams.first.name}模型", context);
+                      },
+                    ),
+                  ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                   child: Row(
                     children: [
                       Expanded(
+                        flex: 2,
                         child: BrnShadowCard(
+                          circular: 8,
                           padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
                           color: Colors.white,
                           child: BrnIconButton(
@@ -96,6 +106,7 @@ class _UploadPageState extends State<UploadPage> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: BrnShadowCard(
+                          circular: 8,
                           padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
                           color: Colors.white,
                           child: BrnIconButton(
@@ -124,15 +135,16 @@ class _UploadPageState extends State<UploadPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   child: Column(
                     children: [
                       Row(
                         children: [
                           Expanded(
                             child: BrnShadowCard(
+                              circular: 8,
                               padding:
-                                  const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                  const EdgeInsets.fromLTRB(16, 16, 16, 16),
                               color: Colors.white,
                               child: imagePath == ""
                                   ? const Center(
