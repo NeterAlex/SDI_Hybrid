@@ -31,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Icons.app_registration,
           color: Colors.white,
         ),
+        backgroundColor: const Color.fromARGB(255, 0, 151, 87),
         themeData: BrnAppBarConfig.dark(),
         elevation: 4,
         title: '注册',
@@ -39,39 +40,49 @@ class _RegisterPageState extends State<RegisterPage> {
         key: _formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30, 200, 30, 0),
+          padding: const EdgeInsets.fromLTRB(32, 150, 32, 0),
           child: Column(
             children: <Widget>[
               TextFormField(
                 controller: _nickController,
                 autofocus: true,
                 decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  border: OutlineInputBorder(),
                   labelText: "用户昵称",
                   hintText: "您的昵称",
-                  icon: Icon(Icons.text_fields_outlined),
+                  prefixIcon: Icon(Icons.text_fields_outlined),
                 ),
                 validator: (v) {
                   return v!.trim().length > 1 ? null : "昵称长度需至少为2";
                 },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _unameController,
                 decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  border: OutlineInputBorder(),
                   labelText: "用户名",
                   hintText: "您的用户名",
-                  icon: Icon(Icons.person),
-                  contentPadding: EdgeInsets.symmetric(vertical: 0),
+                  prefixIcon: Icon(Icons.person),
                 ),
                 validator: (v) {
                   return v!.trim().isNotEmpty ? null : "用户名不能为空";
                 },
               ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _pwdController,
                 decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  border: OutlineInputBorder(),
                   labelText: "密码",
                   hintText: "您的登录密码",
-                  icon: Icon(Icons.lock),
+                  prefixIcon: Icon(Icons.lock),
                 ),
                 obscureText: true,
                 validator: (v) {
@@ -79,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30.0, bottom: 15),
+                padding: const EdgeInsets.fromLTRB(32, 16, 32, 8),
                 child: Row(
                   children: <Widget>[
                     Expanded(
