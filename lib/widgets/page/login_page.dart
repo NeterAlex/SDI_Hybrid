@@ -36,21 +36,27 @@ class _LoginPageState extends State<LoginPage> {
               autofocus: true,
               controller: _unameController,
               decoration: const InputDecoration(
+                filled: true,
+                fillColor: Colors.transparent,
+                border: OutlineInputBorder(),
                 labelText: "用户名",
                 hintText: "您的用户名",
-                icon: Icon(Icons.person),
-                contentPadding: EdgeInsets.symmetric(vertical: 0),
+                prefixIcon: Icon(Icons.person),
               ),
               validator: (v) {
                 return v!.trim().isNotEmpty ? null : "用户名不能为空";
               },
             ),
+            const SizedBox(height: 16),
             TextFormField(
               controller: _pwdController,
               decoration: const InputDecoration(
+                filled: true,
+                fillColor: Colors.transparent,
+                border: OutlineInputBorder(),
                 labelText: "密码",
                 hintText: "您的登录密码",
-                icon: Icon(Icons.lock),
+                prefixIcon: Icon(Icons.lock),
               ),
               obscureText: true,
               validator: (v) {
@@ -58,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30.0, bottom: 15),
+              padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -99,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text(
                 '注册账户',
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: Color.fromARGB(255, 0, 151, 87),
                 ),
               ),
             )),
