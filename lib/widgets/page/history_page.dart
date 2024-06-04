@@ -61,8 +61,11 @@ class _HistoryPageState extends State<HistoryPage> {
                       },
                     );
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                  child: const Text("删除"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                  ),
+                  child:
+                      const Text("删除", style: TextStyle(color: Colors.white)),
                 ),
               );
             },
