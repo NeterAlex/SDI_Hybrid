@@ -43,8 +43,8 @@ class _RecentCardState extends State<RecentCard> {
                     itemCount: data!.length,
                     itemBuilder: (BuildContext context, int index) =>
                         card(data[index]),
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                   );
