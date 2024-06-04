@@ -24,13 +24,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     BrnInitializer.register(
         allThemeConfig: BrnAllThemeConfig(
-            commonConfig:
-                BrnCommonConfig(brandPrimary: const Color(0xFF248700)),
+            commonConfig: BrnCommonConfig(
+                brandPrimary: const Color(0xFF248700),
+                fillBase: const Color(0xF7FBF100)),
             dialogConfig: BrnDialogConfig(radius: 12.0)));
     return MaterialApp(
       title: 'SDI',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
