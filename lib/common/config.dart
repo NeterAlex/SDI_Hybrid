@@ -18,6 +18,6 @@ class Config {
 
   factory Config.fromJson(Map<String, dynamic> json) {
     return Config(
-        serverUrl: json["server_url"] ?? "https://sdi.api.neteralex.cn");
+        serverUrl: json["server_url"] ?? "https://sdi.api.agricserv.cn");
   }
 }
