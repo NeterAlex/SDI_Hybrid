@@ -39,11 +39,3 @@
 5. 运行 `pub get` 安装项目依赖
 6. 在不同目标设备启动项目
 
-### Information
-
-### Build for
-
-+ Android
-+ iOS
-+ Web
-
