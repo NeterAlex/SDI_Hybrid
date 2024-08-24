@@ -16,15 +16,7 @@ pluginManagement {
 //        gradlePluginPortal()
         maven {
             allowInsecureProtocol = true
-            url 'https://maven.aliyun.com/repository/google'
-        }
-        maven {
-            allowInsecureProtocol = true
-            url 'https://maven.aliyun.com/repository/jcenter'
-        }
-        maven {
-            allowInsecureProtocol = true
-            url 'http://maven.aliyun.com/nexus/content/groups/public'
+            url 'https://mirrors.tencent.com/nexus/repository/maven-public/'
         }
     }
 
