@@ -74,15 +74,15 @@ class _UserCardState extends State<UserCard> {
             children: [
               ElevatedButton(
                 style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                         const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     )),
-                    foregroundColor: MaterialStateProperty.resolveWith(
+                    foregroundColor: WidgetStateProperty.resolveWith(
                         (states) => Colors.white),
-                    fixedSize: MaterialStateProperty.resolveWith(
+                    fixedSize: WidgetStateProperty.resolveWith(
                         (states) => const Size(double.infinity, 60)),
-                    backgroundColor: MaterialStateProperty.resolveWith(
+                    backgroundColor: WidgetStateProperty.resolveWith(
                         (state) => const Color.fromARGB(176, 246, 50, 50))),
                 onPressed: () {
                   _userProvider.logout();
