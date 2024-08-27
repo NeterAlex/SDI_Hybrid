@@ -75,15 +75,16 @@ class _LoginPageState extends State<LoginPage> {
                           _userProvider
                               .login(_unameController.text, _pwdController.text)
                               .then((value) => {
-                                    if (value)
+                                    if (value && context.mounted)
                                       {
                                         BrnToast.show("登陆成功", context,
                                             duration: BrnDuration.short)
                                       }
                                     else
                                       {
-                                        BrnToast.show("登陆失败,请检查信息", context,
-                                            duration: BrnDuration.short)
+                                        if (context.mounted)
+                                          BrnToast.show("登陆失败,请检查信息", context,
+                                              duration: BrnDuration.short)
                                       }
                                   });
                         }

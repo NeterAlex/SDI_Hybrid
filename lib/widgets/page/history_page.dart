@@ -48,7 +48,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             as BrnPhotoItemConfig;
                         var imageId = image.name!.split(" - ")[2];
                         var isSuccess = await deleteData(imageId);
-                        if (isSuccess) {
+                        if (isSuccess && context.mounted) {
                           BrnToast.showInCenter(text: "删除成功", context: context);
                           Navigator.pushReplacement(
                               context,
@@ -56,7 +56,10 @@ class _HistoryPageState extends State<HistoryPage> {
                                   builder: (context) => const Material(
                                       child: LayoutPage(title: ""))));
                         } else {
-                          BrnToast.showInCenter(text: "删除失败", context: context);
+                          if (context.mounted) {
+                            BrnToast.showInCenter(
+                                text: "删除失败", context: context);
+                          }
                         }
                       },
                     );

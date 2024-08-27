@@ -102,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 .register(_unameController.text,
                                     _pwdController.text, _nickController.text)
                                 .then((value) => {
-                                      if (value)
+                                      if (value && context.mounted)
                                         {
                                           BrnToast.show("注册成功，已为您登录", context,
                                               duration: BrnDuration.short),
@@ -110,8 +110,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                         }
                                       else
                                         {
-                                          BrnToast.show("注册失败,请检查信息", context,
-                                              duration: BrnDuration.short)
+                                          if (context.mounted)
+                                            BrnToast.show("注册失败,请检查信息", context,
+                                                duration: BrnDuration.short)
                                         }
                                     });
                           }

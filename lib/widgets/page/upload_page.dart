@@ -171,7 +171,7 @@ class _UploadPageState extends State<UploadPage> {
                               });
                               final result = await _uploadImage(
                                   imagePath, uploadType, _userProvider.user.id);
-                              if (result) {
+                              if (result && context.mounted) {
                                 BrnToast.show("识别成功", context);
                                 BrnLoadingDialog.dismiss(context);
                                 Navigator.pushReplacement(
@@ -184,12 +184,14 @@ class _UploadPageState extends State<UploadPage> {
                                   isUploading = false;
                                 });
                               } else {
-                                BrnToast.show("识别失败", context);
-                                BrnLoadingDialog.dismiss(context);
-                                flowProvider.refreshHomePage();
-                                setState(() {
-                                  isUploading = false;
-                                });
+                                if (context.mounted) {
+                                  BrnToast.show("识别失败", context);
+                                  BrnLoadingDialog.dismiss(context);
+                                  flowProvider.refreshHomePage();
+                                  setState(() {
+                                    isUploading = false;
+                                  });
+                                }
                               }
                             }),
                       )
