@@ -95,7 +95,7 @@ Future<List<BrnPhotoGroupConfig>> requestList() async {
     if (item["type"] == "downy") {
       var description = "";
       item["count"].forEach((k, v) => description += "$k：$v处\n");
-
+      if (description == "") description = "未检出";
       downyImageList.add(BrnPhotoItemConfig(
           url: "${config.serverUrl}/${item["image"]}",
           showBottom: true,
@@ -106,6 +106,7 @@ Future<List<BrnPhotoGroupConfig>> requestList() async {
     } else if (item["type"] == "powdery") {
       var description = "";
       item["count"].forEach((k, v) => description += "$k：$v处\n");
+      if (description == "") description = "未检出";
 
       powderyImageList.add(BrnPhotoItemConfig(
           url: "${config.serverUrl}/${item["image"]}",

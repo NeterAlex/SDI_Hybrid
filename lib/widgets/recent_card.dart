@@ -42,7 +42,7 @@ class _RecentCardState extends State<RecentCard> {
                     crossAxisCount: 2,
                     itemCount: data!.length,
                     itemBuilder: (BuildContext context, int index) =>
-                        card(data[index]),
+                        recentCardItem(data[index]),
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
                     physics: const NeverScrollableScrollPhysics(),
@@ -62,7 +62,7 @@ class _RecentCardState extends State<RecentCard> {
   }
 }
 
-Widget card(RecentCardData data) {
+Widget recentCardItem(RecentCardData data) {
   return BrnShadowCard(
       circular: 8,
       color: Colors.white,
@@ -144,6 +144,7 @@ Future<List<RecentCardData>> buildDataList() async {
     final image = "${config.serverUrl}/${data["image"]}";
     var description = "";
     data["count"].forEach((k, v) => description += "$k：$v处\n");
+    if (description == "") description = "未检出";
     final result = RecentCardData(type, finalTime, description, image);
     list.add(result);
   }
